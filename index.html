@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Anshuman a Shawarma</title>
+  <style>
+    :root {
+      --primary: #ff6b35;
+      --primary-dark: #e54e1a;
+      --accent: #f7931e;
+      --bg-dark: #0a0e27;
+      --bg-card: #1a1f3a;
+      --bg-gradient: #16213e;
+      --text-main: #ffffff;
+      --text-secondary: #b0b9d4;
+      --success: #10b981;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-gradient) 50%, #1a0f2e 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      animation: slideDown 0.6s ease-out;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 0%, #b0b9d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .timer {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .timer::before {
+      content: "⏰";
+      font-size: 1.1rem;
+    }
+
+    .main-card {
+      background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(22, 33, 62, 0.6) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px 32px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.6s ease-out;
+    }
+
+    .qr-container {
+      background: white;
+      padding: 16px;
+      border-radius: 20px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .qr-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+    }
+
+    .info-text {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 107, 53, 0.45);
+    }
+
+    .cta-button:active {
+      transform: translateY(-1px);
+    }
+
+    .secondary-button {
+      width: 100%;
+      padding: 14px 24px;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: transparent;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .secondary-button:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(255, 107, 53, 0.1);
+    }
+
+    .progress-section {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .progress-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 45%;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 50px;
+      animation: fillBar 1s ease-out forwards;
+    }
+
+    .progress-text {
+      font-size: 0.9rem;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+
+    .social-proof {
+      background: rgba(16, 185, 129, 0.05);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+      color: var(--success);
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fillBar {
+      from {
+        width: 0;
+      }
+      to {
+        width: 45%;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .main-card {
+        padding: 28px 20px;
+      }
+
+      .cta-button, .secondary-button {
+        padding: 14px 20px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="badge">⏱️ Limited Time</div>
+      <h1>Buy Anshuman a Shawarma</h1>
+      <p class="subtitle">Help fund the quest for the perfect shawarma 🌯</p>
+      <div class="timer">Today Only</div>
+    </div>
+
+    <!-- Main Card -->
+    <div class="main-card">
+      <!-- Social Proof -->
+      <div class="social-proof">
+        ✨ 5 amazing people have already contributed!
+      </div>
+
+      <!-- QR Code -->
+      <div class="qr-container">
+        <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4382bc28-7289-4fd5-9b38-1acff01afd92" alt="UPI Payment QR Code">
+      </div>
+
+      <!-- Info Text -->
+      <p class="info-text">
+        Scan the QR code with any <span class="highlight">UPI app</span> (Google Pay, PhonePe, Paytm, BHIM) and send any amount. <span class="highlight">Every rupee counts!</span>
+      </p>
+
+      <!-- Progress Section -->
+      <div class="progress-section">
+        <div class="progress-label">Goal Progress</div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="progress-text">₹350 of ₹800 raised</div>
+      </div>
+
+      <!-- Buttons -->
+      <button class="cta-button">Scan & Donate Now</button>
+      <button class="secondary-button">Share with Friends</button>
+
+      <!-- Footer Text -->
+      <div class="footer">
+        💝 Thank you for helping Anshuman get a delicious shawarma today!
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('.cta-button').addEventListener('click', () => {
+      // Scroll to QR code for visibility
+      document.querySelector('.qr-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Show actionable message
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(4px);
+      `;
+      
+      modal.innerHTML = `
+        <div style="
+          background: linear-gradient(135deg, #1a1f3a 0%, #16213e 100%);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 20px;
+          padding: 32px;
+          max-width: 380px;
+          text-align: center;
+          color: white;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        ">
+          <h2 style="margin: 0 0 16px 0; font-size: 1.4rem; color: #ff6b35;">Ready to Donate? 🎉</h2>
+          <p style="margin: 0 0 24px 0; color: #b0b9d4; line-height: 1.6;">
+            Use any of these UPI apps to scan the QR code above and send your donation:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+            <button onclick="openUPI('gpay')" style="
+              padding: 12px;
+              background: rgba(255, 107, 53, 0.2);
+              border: 1px solid #ff6b35;
+              border-radius: 10px;
+              color: #ff6b35;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.3s;
+            " onmouseover="this.style.background='rgba(255, 107, 53, 0.3)'" onmouseout="this.style.background='rgba(255, 107, 53, 0.2)'">
+              Google Pay
+            </button>
+            <button onclick="openUPI('phonepe')" style="
+              padding: 12px;
+              background: rgba(255, 107, 53, 0.2);
+              border: 1px solid #ff6b35;
+              border-radius: 10px;
+              color: #ff6b35;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.3s;
+            " onmouseover="this.style.background='rgba(255, 107, 53, 0.3)'" onmouseout="this.style.background='rgba(255, 107, 53, 0.2)'">
+              PhonePe
+            </button>
+            <button onclick="openUPI('paytm')" style="
+              padding: 12px;
+              background: rgba(255, 107, 53, 0.2);
+              border: 1px solid #ff6b35;
+              border-radius: 10px;
+              color: #ff6b35;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.3s;
+            " onmouseover="this.style.background='rgba(255, 107, 53, 0.3)'" onmouseout="this.style.background='rgba(255, 107, 53, 0.2)'">
+              Paytm
+            </button>
+            <button onclick="openUPI('bhim')" style="
+              padding: 12px;
+              background: rgba(255, 107, 53, 0.2);
+              border: 1px solid #ff6b35;
+              border-radius: 10px;
+              color: #ff6b35;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.3s;
+            " onmouseover="this.style.background='rgba(255, 107, 53, 0.3)'" onmouseout="this.style.background='rgba(255, 107, 53, 0.2)'">
+              BHIM
+            </button>
+          </div>
+          <p style="margin: 0 0 16px 0; color: #b0b9d4; font-size: 0.9rem;">
+            Or just scan the QR with your phone camera directly
+          </p>
+          <button onclick="closeModal()" style="
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+          " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+            Got it! Close
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      window.closeModal = () => modal.remove();
+      window.openUPI = (app) => {
+        alert(`📱 Opening ${app.toUpperCase()} - please scan the QR code above!`);
+        modal.remove();
+      };
+    });
+
+    document.querySelector('.secondary-button').addEventListener('click', () => {
+      const text = 'Help me get a shawarma! 🌯 Scan the QR and donate: ' + window.location.href;
+      if (navigator.share) {
+        navigator.share({
+          title: 'Buy Anshuman a Shawarma',
+          text: text,
+          url: window.location.href
+        });
+      } else {
+        alert('Share link: ' + window.location.href);
+      }
+    });
+  </script>
+</body>
+</html>
